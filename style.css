@@ -1,0 +1,38 @@
+body {
+    background-image: linear-gradient(43deg, #b8c0f1 0%, #e26fdb 46%, #fdd385 );
+    background-repeat: no-repeat;
+  height: 1000px;
+    font-family: 'Girassol', cursive;
+
+}
+  
+header {
+    font-size: 40px;
+    text-align: center;
+    color: rgb(19, 18, 19);
+   text-shadow: 5px 5px rgba(231, 226, 226, 0.664);
+}
+
+
+body nav ul li{
+    display: inline-block;
+}
+body nav ul li a {
+    color: black;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+img {
+    width: 300px;
+    height: 300px;
+    margin: 30px;
+    padding: 5px;
+    border-radius: 50px;
+    box-shadow:6px 6px rgba(231, 226, 226, 0.664);
+}
+
+
+footer{
+    padding-top:150px ;
+}
