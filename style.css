@@ -13,6 +13,14 @@ header {
    text-shadow: 5px 5px rgba(231, 226, 226, 0.664);
 }
 
+.btn{
+    color:rgb(12, 12, 12);
+    text-align: center;
+    margin: 40px;
+   font-size: large;
+
+}
+
 
 body nav ul li{
     display: inline-block;
