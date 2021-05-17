@@ -85,7 +85,22 @@ function render3Images() {
     img2.addEventListener('click',OnClick);
     img3.addEventListener('click',OnClick);
     
-    
+
+    function renderShow() {
+        let index = document.createElement('button');
+        index.textContent = 'Show Result';
+        button.appendChild(index);
+        
+        document.getElementById("button").addEventListener("click", function() {
+            let Indexlist ; 
+            for (let i = 0; i < AllImages.length; i++) {
+                Indexlist = document.createElement('li');
+                result.appendChild(Indexlist);
+                Indexlist.textContent=`${AllImages[i].name}  has ${AllImages[i].votes} votes`;
+            }    
+          });
+  
+        }
     function OnClick(event) {
         
         userAttemp++;
@@ -103,13 +118,6 @@ function render3Images() {
             img1.removeEventListener('click', OnClick);
             img2.removeEventListener('click', OnClick);
             img3.removeEventListener('click', OnClick);
-            
-            let result = document.getElementById('result');
-            let Indexlist ; 
-            for (let i = 0; i < AllImages.length; i++) {
-                Indexlist = document.createElement('li');
-                result.appendChild(Indexlist);
-                Indexlist.textContent=`${AllImages[i].name}  has ${AllImages[i].votes} votes`;
-            }    
+            renderShow();
         }
 }
