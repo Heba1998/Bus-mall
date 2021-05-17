@@ -1,9 +1,12 @@
 body {
     background-image: linear-gradient(43deg, #b8c0f1 0%, #e26fdb 46%, #fdd385 );
     background-repeat: no-repeat;
-  height: 2000px;
+  height: 2500px;
     font-family: 'Girassol', cursive;
 
+}
+h3 ,h4 {
+    text-align: center;
 }
   
 header {
