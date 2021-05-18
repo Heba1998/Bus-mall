@@ -3,6 +3,18 @@
 let maxAttempts;
 let userAttemp=0;
 
+
+
+let ImageNames = [];
+let ImageVotes = [];
+let ImageShown = []; 
+
+// to compare images in last attempt with images in these attempt
+let img1FromLastAttempt;
+let img2FromLastAttempt;
+let img3FromLastAttempt;
+
+
 let img1 = document.getElementById('img1');
 let img2 = document.getElementById('img2');
 let img3 = document.getElementById('img3');
@@ -11,6 +23,8 @@ function BusMall(name, Path) {
     this.name = name;
     this.Path = Path;
     this.votes=0;
+    this.shown = 0;
+    ImageNames.push(this.name);
     AllImages.push(this);
     
 }
@@ -67,21 +81,31 @@ function render3Images() {
         //  }
         
         //  render3Images();
-        
+
+
         img1Index = CreateRandomimg();
         img2Index = CreateRandomimg();
         img3Index = CreateRandomimg();
         
-        if (img1Index === img2Index) {
+        if (img1Index === img2Index || img1Index === img3Index || img1Index === img1FromLastAttempt ||img1Index === img2FromLastAttempt ||img1Index === img3FromLastAttempt) {
+            img1Index = CreateRandomimg();
+        } else if (img2Index === img1Index || img2Index === img3Index || img2Index === img1FromLastAttempt ||img2Index === img2FromLastAttempt ||img2Index === img3FromLastAttempt) {
             img2Index = CreateRandomimg();
-        } else if (img1Index === img3Index) {
-            img3Index = CreateRandomimg();
-        } else if (img2Index === img3Index) {
+        } else if (img3Index === img1Index || img3Index === img2Index || img3Index === img1FromLastAttempt ||img3Index === img2FromLastAttempt ||img3Index === img3FromLastAttempt) {
             img3Index = CreateRandomimg();
         }else{
             img1.src = AllImages[img1Index].Path;
             img3.src = AllImages[img3Index].Path;
             img2.src = AllImages[img2Index].Path;
+            
+            
+            img1FromLastAttempt = img1Index;
+            img2FromLastAttempt = img2Index;
+            img3FromLastAttempt = img3Index;
+
+            AllImages[img1Index].shown++;
+            AllImages[img2Index].shown++;
+            AllImages[img3Index].shown++;
         } 
     }
     render3Images();
@@ -98,17 +122,6 @@ function render3Images() {
         button.appendChild(index);
         
 
-        
-    document.getElementById("button").addEventListener("click", function() {
-        let Indexlist ; 
-        for (let i = 0; i < AllImages.length; i++) {
-            Indexlist = document.createElement('li');
-            result.appendChild(Indexlist);
-            Indexlist.textContent=`${AllImages[i].name}  has ${AllImages[i].votes} votes`;
-        }    
-    });
-    
-    }
     function OnClick(event) {
         
         userAttemp++;
