@@ -1,8 +1,7 @@
 'user strict';
 
-let maxAttempts = 25;
+let maxAttempts;
 let userAttemp = 0;
-
 
 
 let ImageNames = [];
@@ -24,11 +23,30 @@ function BusMall(name, Path) {
     this.Path = Path;
     this.votes=0;
     this.shown = 0;
-    ImageNames.push(this.name);
+   ImageNames.push(this.name);
     AllImages.push(this);
     
 }
 let AllImages = [];
+
+
+
+function setImage() {
+    let imagedata = JSON.stringify(AllImages);
+    console.log(AllImages);
+    console.log(imagedata);
+    localStorage.setItem('BusMall', imagedata);
+ 
+}
+
+
+function getImage() {
+    let imagedata1 = localStorage.getItem('BusMall');
+    let data = JSON.parse(imagedata1);
+    if (data !== null) {
+        AllImages = data;
+    }
+}
 
 new BusMall('bag', 'img/bag.jpg');
 new BusMall('banana', 'img/banana.jpg');
@@ -123,33 +141,33 @@ function render3Images() {
         
         document.getElementById("button").addEventListener("click", function() {
             let Indexlist ; 
-             for (let i = 0; i < AllImages.length; i++) {
-                     Indexlist = document.createElement('li');
-                     result.appendChild(Indexlist);
-                     Indexlist.textContent=`${AllImages[i].name}  has ${AllImages[i].votes} votes`;
-                 }    
-                for (let i = 0; i < AllImages.length; i++) {
-                    ImageVotes.push(AllImages[i].votes);
-                    ImageShown.push(AllImages[i].shown);
-                }
-                viewChart();
-            });
-            
-        }
+            for (let i = 0; i < AllImages.length; i++) {
+                Indexlist = document.createElement('li');
+                result.appendChild(Indexlist);
+                Indexlist.textContent=`${AllImages[i].name}  has ${AllImages[i].votes} votes`;
+            }    
+            for (let i = 0; i < AllImages.length; i++) {
+                ImageVotes.push(AllImages[i].votes);
+                ImageShown.push(AllImages[i].shown);
+            }
+            viewChart();
+        });
         
+    }
+    
+    
+    
+    
+    let myChart;
+    
+    function viewChart() {
         
-        
-        
-        let myChart;
-        
-        function viewChart() {
-            
-            let ctx = document.getElementById('myChart').getContext('2d');
-            myChart = new Chart(ctx, {
-                type: 'bar',
-        data: {
-            labels: ImageNames,
-            datasets: [{
+        let ctx = document.getElementById('myChart').getContext('2d');
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ImageNames,
+                datasets: [{
                     label: '# of image Votes',
                     data: ImageVotes,
                     backgroundColor: '#a7a5f4',
@@ -165,32 +183,34 @@ function render3Images() {
             ]
         },
         options: {
-
+            
         }
     });
-
+    
 }
 
 
 
-    function OnClick(event) {
-        
-        userAttemp++;
-        if (userAttemp <= maxAttempts) {
-            if (event.target.id === 'img1') {
-                AllImages[img1Index].votes = AllImages[img1Index].votes + 1
-            } else if (event.target.id === 'img2') {
-                AllImages[img2Index].votes = AllImages[img2Index].votes + 1
-            } else {
-                AllImages[img3Index].votes = AllImages[img3Index].votes + 1
-            }
-            render3Images();
+function OnClick(event) {
+    setImage();
+    
+    userAttemp++;
+    if (userAttemp <= maxAttempts) {
+        if (event.target.id === 'img1') {
+            AllImages[img1Index].votes = AllImages[img1Index].votes + 1
+        } else if (event.target.id === 'img2') {
+            AllImages[img2Index].votes = AllImages[img2Index].votes + 1
+        } else {
+            AllImages[img3Index].votes = AllImages[img3Index].votes + 1
         }
-        else {
+        render3Images();
+    }
+    else {
             img1.removeEventListener('click', OnClick);
             img2.removeEventListener('click', OnClick);
             img3.removeEventListener('click', OnClick);
             renderShow();
         }
-}
+    }
+ getImage();
 
