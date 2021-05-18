@@ -1,7 +1,7 @@
 'user strict';
 
-let maxAttempts = 25;
-let userAttemp = 0;
+let maxAttempts;
+let userAttemp=0;
 
 
 
@@ -61,6 +61,12 @@ let img2Index = CreateRandomimg();
 let img3Index = CreateRandomimg();
 
 
+// function to user choose
+function UserTries() {
+    maxAttempts = document.getElementById("Number").value;
+    
+  }
+
 
 
 // Create Render Function 
@@ -110,63 +116,11 @@ function render3Images() {
     img3.addEventListener('click',OnClick);
     
     
-    
     function renderShow() {
         let index = document.createElement('button');
         index.textContent = 'Show Result';
         button.appendChild(index);
         
-        document.getElementById("button").addEventListener("click", function() {
-            //let Indexlist ; 
-            // for (let i = 0; i < AllImages.length; i++) {
-                //     Indexlist = document.createElement('li');
-                //     result.appendChild(Indexlist);
-                //     Indexlist.textContent=`${AllImages[i].name}  has ${AllImages[i].votes} votes`;
-                // }    
-                for (let i = 0; i < AllImages.length; i++) {
-                    ImageVotes.push(AllImages[i].votes);
-                    ImageShown.push(AllImages[i].shown);
-                }
-                viewChart();
-            });
-            
-        }
-        
-        
-        
-        
-        let myChart;
-        
-        function viewChart() {
-            
-            let ctx = document.getElementById('myChart').getContext('2d');
-            myChart = new Chart(ctx, {
-                type: 'bar',
-        data: {
-            labels: ImageNames,
-            datasets: [{
-                    label: '# of image Votes',
-                    data: ImageVotes,
-                    backgroundColor: '#a7a5f4',
-                    
-                    borderWidth: 1
-                },
-                {
-                    label: '# of image shown',
-                    backgroundColor: '#fec56b',
-                    borderColor:  'white',
-                    data: ImageShown
-                }
-            ]
-        },
-        options: {
-
-        }
-    });
-
-}
-
-
 
     function OnClick(event) {
         
@@ -176,7 +130,7 @@ function render3Images() {
                 AllImages[img1Index].votes = AllImages[img1Index].votes + 1
             } else if (event.target.id === 'img2') {
                 AllImages[img2Index].votes = AllImages[img2Index].votes + 1
-            } else {
+            } else if(event.target.id === 'img3') {
                 AllImages[img3Index].votes = AllImages[img3Index].votes + 1
             }
             render3Images();
@@ -186,5 +140,6 @@ function render3Images() {
             img2.removeEventListener('click', OnClick);
             img3.removeEventListener('click', OnClick);
             renderShow();
+    
         }
 }
