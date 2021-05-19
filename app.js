@@ -25,27 +25,26 @@ function BusMall(name, Path) {
     this.shown = 0;
    ImageNames.push(this.name);
     AllImages.push(this);
+ 
     
 }
-let AllImages = [];
+AllImages = [];
 
 
 
 function setImage() {
-    let imagedata = JSON.stringify(AllImages);
-    console.log(AllImages);
-    console.log(imagedata);
-    localStorage.setItem('BusMall', imagedata);
- 
+   let Arraydata = JSON.stringify(AllImages);
+    localStorage.setItem('Images',Arraydata); 
 }
 
 
 function getImage() {
-    let imagedata1 = localStorage.getItem('BusMall');
-    let data = JSON.parse(imagedata1);
-    if (data !== null) {
-        AllImages = data;
+  let Data = localStorage.getItem('Images');
+    let imagedata = JSON.parse(Data);
+    if (imagedata !== null) {
+        AllImages = imagedata;
     }
+   render3Images(); 
 }
 
 new BusMall('bag', 'img/bag.jpg');
@@ -150,6 +149,7 @@ function render3Images() {
                 ImageVotes.push(AllImages[i].votes);
                 ImageShown.push(AllImages[i].shown);
             }
+            setImage();
             viewChart();
         });
         
@@ -192,7 +192,6 @@ function render3Images() {
 
 
 function OnClick(event) {
-    setImage();
     
     userAttemp++;
     if (userAttemp <= maxAttempts) {
@@ -204,6 +203,7 @@ function OnClick(event) {
             AllImages[img3Index].votes = AllImages[img3Index].votes + 1
         }
         render3Images();
+        console.log(userAttemp);
     }
     else {
             img1.removeEventListener('click', OnClick);
