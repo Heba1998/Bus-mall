@@ -203,6 +203,7 @@ function OnClick(event) {
         } else {
             AllImages[img3Index].votes = AllImages[img3Index].votes + 1
         }
+        console.log("user attempt:", userAttemp);
         render3Images();
     }
     else {
