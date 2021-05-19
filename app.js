@@ -132,17 +132,7 @@ function render3Images() {
                 ImageVotes.push(AllImages[i].votes);
                 ImageShown.push(AllImages[i].shown);
             }
-        });
-        
-    }
-    
-    
-    
-    
-  
-function OnClick(event) {
- 
-    
+
     userAttemp++;
     if (userAttemp <= maxAttempts) {
         if (event.target.id === 'img1') {
@@ -152,6 +142,7 @@ function OnClick(event) {
         } else {
             AllImages[img3Index].votes = AllImages[img3Index].votes + 1
         }
+
         // to make sure if i can press above the image or not 
         console.log("user Attempt: ",userAttemp);
         render3Images();
@@ -163,5 +154,8 @@ function OnClick(event) {
         renderShow();
     }
 }
+
+
+
 
 
