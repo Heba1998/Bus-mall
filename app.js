@@ -29,7 +29,6 @@ function BusMall(name, Path) {
 }
 let AllImages = [];
 
-
 new BusMall('bag', 'img/bag.jpg');
 new BusMall('banana', 'img/banana.jpg');
 new BusMall('bathroom', 'img/bathroom.jpg');
@@ -65,7 +64,7 @@ let img3Index = CreateRandomimg();
 function UserTries() {
     maxAttempts = document.getElementById("Number").value;
     
-}
+  }
 
 
 // Create Render Function 
@@ -80,8 +79,8 @@ function render3Images() {
         //  }
         
         //  render3Images();
-        
-        
+
+
         img1Index = CreateRandomimg();
         img2Index = CreateRandomimg();
         img3Index = CreateRandomimg();
@@ -101,7 +100,7 @@ function render3Images() {
             img1FromLastAttempt = img1Index;
             img2FromLastAttempt = img2Index;
             img3FromLastAttempt = img3Index;
-            
+
             AllImages[img1Index].shown++;
             AllImages[img2Index].shown++;
             AllImages[img3Index].shown++;
@@ -132,7 +131,50 @@ function render3Images() {
                 ImageVotes.push(AllImages[i].votes);
                 ImageShown.push(AllImages[i].shown);
             }
+            viewChart();
+        });
+        
+    }
+    
+    
+    
+    
+    let myChart;
+    
+    function viewChart() {
+        
+        let ctx = document.getElementById('myChart').getContext('2d');
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ImageNames,
+                datasets: [{
+                    label: '# of image Votes',
+                    data: ImageVotes,
+                    backgroundColor: '#a7a5f4',
+                    
+                    borderWidth: 1
+                },
+                {
+                    label: '# of image shown',
+                    backgroundColor: '#fec56b',
+                    borderColor:  'white',
+                    data: ImageShown
+                }
+            ]
+        },
+        options: {
+            
+        }
+    });
+    
+}
 
+
+
+function OnClick(event) {
+
+    
     userAttemp++;
     if (userAttemp <= maxAttempts) {
         if (event.target.id === 'img1') {
@@ -142,20 +184,13 @@ function render3Images() {
         } else {
             AllImages[img3Index].votes = AllImages[img3Index].votes + 1
         }
-
-        // to make sure if i can press above the image or not 
-        console.log("user Attempt: ",userAttemp);
         render3Images();
     }
     else {
-        img1.removeEventListener('click', OnClick);
-        img2.removeEventListener('click', OnClick);
-        img3.removeEventListener('click', OnClick);
-        renderShow();
+            img1.removeEventListener('click', OnClick);
+            img2.removeEventListener('click', OnClick);
+            img3.removeEventListener('click', OnClick);
+            renderShow();
+        }
     }
-}
-
-
-
-
 
