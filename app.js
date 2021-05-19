@@ -152,6 +152,7 @@ function OnClick(event) {
         } else {
             AllImages[img3Index].votes = AllImages[img3Index].votes + 1
         }
+        // to make sure if i can press above the image or not 
         console.log("user Attempt: ",userAttemp);
         render3Images();
     }
