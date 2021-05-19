@@ -50,26 +50,6 @@ new BusMall('wine-glass', 'img/wine-glass.jpg');
 
 
 
-
-
-function setImage() {
-    let imagedata = JSON.stringify(AllImages);
-    console.log(AllImages);
-    console.log(imagedata);
-    localStorage.setItem('BusMall', imagedata);
- 
-}
-
-
-function getImage() {
-    let imagedata1 = localStorage.getItem('BusMall');
-    let data = JSON.parse(imagedata1);
-    if (data !== null) {
-        AllImages = data;
-    }
-}
-
-
 // Create Random function
 
 function CreateRandomimg() {
@@ -156,7 +136,7 @@ function render3Images() {
     
     
     function OnClick(event) {
-        setImage();
+  
         userAttemp++;
         if (userAttemp <= maxAttempts) {
             if (event.target.id === 'img1') {
@@ -176,4 +156,3 @@ function render3Images() {
             
         }
 }
-getImage();
