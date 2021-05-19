@@ -1,7 +1,8 @@
 'user strict';
 
 let maxAttempts;
-let userAttemp=0;
+let userAttemp = 0;
+
 
 let ImageNames = [];
 let ImageVotes = [];
@@ -22,11 +23,12 @@ function BusMall(name, Path) {
     this.Path = Path;
     this.votes=0;
     this.shown = 0;
-    ImageNames.push(this.name);
+   ImageNames.push(this.name);
     AllImages.push(this);
     
 }
 let AllImages = [];
+
 
 new BusMall('bag', 'img/bag.jpg');
 new BusMall('banana', 'img/banana.jpg');
@@ -48,8 +50,6 @@ new BusMall('unicorn', 'img/unicorn.jpg');
 new BusMall('water-can', 'img/water-can.jpg');
 new BusMall('wine-glass', 'img/wine-glass.jpg');
 
-
-
 // Create Random function
 
 function CreateRandomimg() {
@@ -65,8 +65,7 @@ let img3Index = CreateRandomimg();
 function UserTries() {
     maxAttempts = document.getElementById("Number").value;
     
-  }
-
+}
 
 
 // Create Render Function 
@@ -81,8 +80,8 @@ function render3Images() {
         //  }
         
         //  render3Images();
-
-
+        
+        
         img1Index = CreateRandomimg();
         img2Index = CreateRandomimg();
         img3Index = CreateRandomimg();
@@ -102,7 +101,7 @@ function render3Images() {
             img1FromLastAttempt = img1Index;
             img2FromLastAttempt = img2Index;
             img3FromLastAttempt = img3Index;
-
+            
             AllImages[img1Index].shown++;
             AllImages[img2Index].shown++;
             AllImages[img3Index].shown++;
@@ -114,7 +113,6 @@ function render3Images() {
     img1.addEventListener('click',OnClick);
     img2.addEventListener('click',OnClick);
     img3.addEventListener('click',OnClick);
-    
     
     
     
@@ -130,29 +128,39 @@ function render3Images() {
                 result.appendChild(Indexlist);
                 Indexlist.textContent=`${AllImages[i].name}  has ${AllImages[i].votes} votes`;
             }    
+            for (let i = 0; i < AllImages.length; i++) {
+                ImageVotes.push(AllImages[i].votes);
+                ImageShown.push(AllImages[i].shown);
+            }
         });
         
     }
     
     
-    function OnClick(event) {
+    
+    
   
-        userAttemp++;
-        if (userAttemp <= maxAttempts) {
-            if (event.target.id === 'img1') {
-                AllImages[img1Index].votes = AllImages[img1Index].votes + 1
-            } else if (event.target.id === 'img2') {
-                AllImages[img2Index].votes = AllImages[img2Index].votes + 1
-            } else if(event.target.id === 'img3') {
-                AllImages[img3Index].votes = AllImages[img3Index].votes + 1
-            }
-            render3Images();
+function OnClick(event) {
+ 
+    
+    userAttemp++;
+    if (userAttemp <= maxAttempts) {
+        if (event.target.id === 'img1') {
+            AllImages[img1Index].votes = AllImages[img1Index].votes + 1
+        } else if (event.target.id === 'img2') {
+            AllImages[img2Index].votes = AllImages[img2Index].votes + 1
+        } else {
+            AllImages[img3Index].votes = AllImages[img3Index].votes + 1
         }
-        else {
-            img1.removeEventListener('click', OnClick);
-            img2.removeEventListener('click', OnClick);
-            img3.removeEventListener('click', OnClick);
-            renderShow();
-            
-        }
+        console.log("user Attempt: ",userAttemp);
+        render3Images();
+    }
+    else {
+        img1.removeEventListener('click', OnClick);
+        img2.removeEventListener('click', OnClick);
+        img3.removeEventListener('click', OnClick);
+        renderShow();
+    }
 }
+
+
