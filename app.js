@@ -30,24 +30,6 @@ function BusMall(name, Path) {
 let AllImages = [];
 
 
-
-function setImage() {
-    let imagedata = JSON.stringify(AllImages);
-    console.log(AllImages);
-    console.log(imagedata);
-    localStorage.setItem('BusMall', imagedata);
- 
-}
-
-
-function getImage() {
-    let imagedata1 = localStorage.getItem('BusMall');
-    let data = JSON.parse(imagedata1);
-    if (data !== null) {
-        AllImages = data;
-    }
-}
-
 new BusMall('bag', 'img/bag.jpg');
 new BusMall('banana', 'img/banana.jpg');
 new BusMall('bathroom', 'img/bathroom.jpg');
@@ -150,50 +132,7 @@ function render3Images() {
                 ImageVotes.push(AllImages[i].votes);
                 ImageShown.push(AllImages[i].shown);
             }
-            viewChart();
-        });
-        
-    }
-    
-    
-    
-    
-    let myChart;
-    
-    function viewChart() {
-        
-        let ctx = document.getElementById('myChart').getContext('2d');
-        myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ImageNames,
-                datasets: [{
-                    label: '# of image Votes',
-                    data: ImageVotes,
-                    backgroundColor: '#a7a5f4',
-                    
-                    borderWidth: 1
-                },
-                {
-                    label: '# of image shown',
-                    backgroundColor: '#fec56b',
-                    borderColor:  'white',
-                    data: ImageShown
-                }
-            ]
-        },
-        options: {
-            
-        }
-    });
-    
-}
 
-
-
-function OnClick(event) {
-    setImage();
-    
     userAttemp++;
     if (userAttemp <= maxAttempts) {
         if (event.target.id === 'img1') {
@@ -203,7 +142,9 @@ function OnClick(event) {
         } else {
             AllImages[img3Index].votes = AllImages[img3Index].votes + 1
         }
-        console.log("user attempt:", userAttemp);
+
+        // to make sure if i can press above the image or not 
+        console.log("user Attempt: ",userAttemp);
         render3Images();
     }
     else {
@@ -213,5 +154,8 @@ function OnClick(event) {
         renderShow();
     }
 }
-getImage();
+
+
+
+
 
