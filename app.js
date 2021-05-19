@@ -25,9 +25,27 @@ function BusMall(name, Path) {
     this.shown = 0;
    ImageNames.push(this.name);
     AllImages.push(this);
+ 
     
 }
-let AllImages = [];
+AllImages = [];
+
+
+
+function setImage() {
+   let Arraydata = JSON.stringify(AllImages);
+    localStorage.setItem('Images',Arraydata); 
+}
+
+
+function getImage() {
+  let Data = localStorage.getItem('Images');
+    let imagedata = JSON.parse(Data);
+    if (imagedata !== null) {
+        AllImages = imagedata;
+    }
+   render3Images(); 
+}
 
 new BusMall('bag', 'img/bag.jpg');
 new BusMall('banana', 'img/banana.jpg');
@@ -131,6 +149,7 @@ function render3Images() {
                 ImageVotes.push(AllImages[i].votes);
                 ImageShown.push(AllImages[i].shown);
             }
+            setImage();
             viewChart();
         });
         
@@ -173,7 +192,6 @@ function render3Images() {
 
 
 function OnClick(event) {
-
     
     userAttemp++;
     if (userAttemp <= maxAttempts) {
@@ -184,8 +202,8 @@ function OnClick(event) {
         } else {
             AllImages[img3Index].votes = AllImages[img3Index].votes + 1
         }
-        console.log("User Attempt:"  , userAttemp);
         render3Images();
+        console.log(userAttemp);
     }
     else {
             img1.removeEventListener('click', OnClick);
@@ -194,4 +212,5 @@ function OnClick(event) {
             renderShow();
         }
     }
+ getImage();
 
