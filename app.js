@@ -83,7 +83,7 @@ let img3Index = CreateRandomimg();
 function UserTries() {
     maxAttempts = document.getElementById("Number").value;
     
-  }
+}
 
 
 // Create Render Function 
@@ -98,8 +98,8 @@ function render3Images() {
         //  }
         
         //  render3Images();
-
-
+        
+        
         img1Index = CreateRandomimg();
         img2Index = CreateRandomimg();
         img3Index = CreateRandomimg();
@@ -119,7 +119,7 @@ function render3Images() {
             img1FromLastAttempt = img1Index;
             img2FromLastAttempt = img2Index;
             img3FromLastAttempt = img3Index;
-
+            
             AllImages[img1Index].shown++;
             AllImages[img2Index].shown++;
             AllImages[img3Index].shown++;
@@ -206,11 +206,11 @@ function OnClick(event) {
         render3Images();
     }
     else {
-            img1.removeEventListener('click', OnClick);
-            img2.removeEventListener('click', OnClick);
-            img3.removeEventListener('click', OnClick);
-            renderShow();
-        }
+        img1.removeEventListener('click', OnClick);
+        img2.removeEventListener('click', OnClick);
+        img3.removeEventListener('click', OnClick);
+        renderShow();
     }
- getImage();
+}
+getImage();
 
