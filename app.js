@@ -33,14 +33,14 @@ AllImages = [];
 
 
 function setImage() {
-   let Arraydata = JSON.stringify(AllImages);
-    localStorage.setItem('Images',Arraydata); 
+   let data = JSON.stringify(AllImages);
+    localStorage.setItem('AllImages',data); 
 }
 
 
 function getImage() {
-  let Data = localStorage.getItem('Images');
-    let imagedata = JSON.parse(Data);
+  let getData = localStorage.getItem('AllImages');
+    let imagedata = JSON.parse(getData);
     if (imagedata !== null) {
         AllImages = imagedata;
     }
